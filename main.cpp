@@ -81,6 +81,8 @@ void storeInfoVectorAndSortInfoMap(string fileToRead) {
     }
     cout << endl;
     
+    
+    
     cout << "Organize by using List" << endl;
     int M = 2;
     list <string> listState;
@@ -91,7 +93,7 @@ void storeInfoVectorAndSortInfoMap(string fileToRead) {
         listState.push_back("");
     }
     
-    for(list <string>::iterator it = listState.begin(); it != listState.end(); it++) {
+    for(vector <string>::iterator it = wordVector.begin(); it != wordVector.end(); it++) {
         listWordMap[listState].push_back(*it);
         listState.push_back(*it);
         listState.pop_front();
