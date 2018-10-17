@@ -60,7 +60,7 @@ void storeInfoVectorAndSortInfoMap(string fileToRead) {
         cout << wordMap[state] << " ";
         state = wordMap[state];
     }
-    cout << endl;
+    cout << endl << endl;
     
     cout << "Organized Sermon/Poem/etc." << endl;
     map<string, vector<string>> organizeWordMap;
@@ -79,7 +79,7 @@ void storeInfoVectorAndSortInfoMap(string fileToRead) {
         cout << organizeWordMap[state][ind] << " ";
         organizeState = organizeWordMap[state][ind];
     }
-    cout << endl;
+    cout << endl << endl;
     
     
     
@@ -146,7 +146,9 @@ void storeInfoSet(string fileToRead) {
     return;
 }
 
-
+void sortInfoUniquely(string fileToRead) {
+    
+}
 
 int main(int argc, char* argv[]) {
     
@@ -154,10 +156,11 @@ int main(int argc, char* argv[]) {
     
     string fileName(argv[1] + string(".txt"));
     
-    storeInfoSet(fileName);
+    storeInfoSet(fileName); //reads words into file with a set.
     
-    storeInfoVectorAndSortInfoMap(fileName);
+    storeInfoVectorAndSortInfoMap(fileName); 
+    //reads file into vector and organizes sermons in maps showing the difference between using vectors and lists to make a more organized sermon.
     
-    
+    sortInfoUniquely(fileName);
     return 0;
 }
