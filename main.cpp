@@ -146,8 +146,49 @@ void storeInfoSet(string fileToRead) {
     return;
 }
 
-void sortInfoUniquely(string fileToRead) {
+void sortInfoLarge(string fileToRead) {
     
+    string out_fileName(fileToRead + string("large"));
+    string out_putfileName(fileToRead + string("small"));
+    string next_line;
+    vector <string> smallWordVector;
+    vector <string> largeWordVector;
+    ifs.open(fileToRead.c_str());
+    ofs.open(out_fileName.c_str());
+    while(getline(ifs, next_line)) {
+        istringstream iss(next_line);
+        string temp;
+        while(iss >> temp) {
+            string nopunct = "";
+            for(auto const &c : temp) {
+                if (isalpha(c)) {
+                    nopunct += c;
+                }
+            }
+            if(nopunct.length() < 5) {
+                smallWordVector.push_back(nopunct);
+            }
+            else {
+            largeWordVector.push_back(nopunct);
+            }
+        }
+    }
+    
+    for(int i = 0; i < largeWordVector.size(); i++) {
+        ofs << largeWordVector.at(i) << endl;
+    }
+    ifs.close();
+    ofs.close();
+    
+    ofs.open(out_putfileName.c_str());
+    
+    for(int i = 0; i < smallWordVector.size(); i++) {
+        ofs << smallWordVector.at(i) << endl;
+    }
+    
+    ofs.close();
+    
+    return;
 }
 
 int main(int argc, char* argv[]) {
@@ -161,6 +202,7 @@ int main(int argc, char* argv[]) {
     storeInfoVectorAndSortInfoMap(fileName); 
     //reads file into vector and organizes sermons in maps showing the difference between using vectors and lists to make a more organized sermon.
     
-    sortInfoUniquely(fileName);
+    sortInfoLarge(fileName); //reads file and splits words smaller than 5 into a small file and larger words into another.
+    
     return 0;
 }
