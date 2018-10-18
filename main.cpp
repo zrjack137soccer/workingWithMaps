@@ -150,9 +150,11 @@ void sortInfoLarge(string fileToRead) {
     
     string out_fileName(fileToRead + string("large"));
     string out_putfileName(fileToRead + string("small"));
+    string out_capitalFile(fileToRead + string("important"));
     string next_line;
     vector <string> smallWordVector;
     vector <string> largeWordVector;
+    vector <string> importantTerms;
     ifs.open(fileToRead.c_str());
     ofs.open(out_fileName.c_str());
     while(getline(ifs, next_line)) {
@@ -168,12 +170,15 @@ void sortInfoLarge(string fileToRead) {
             if(nopunct.length() < 5) {
                 smallWordVector.push_back(nopunct);
             }
+            else if(isupper(nopunct.at(0))) {
+                importantTerms.push_back(nopunct);
+            }
             else {
             largeWordVector.push_back(nopunct);
             }
         }
     }
-    
+    cout << "Amount of Large Words in text: " << largeWordVector.size() << endl;
     for(int i = 0; i < largeWordVector.size(); i++) {
         ofs << largeWordVector.at(i) << endl;
     }
@@ -181,9 +186,18 @@ void sortInfoLarge(string fileToRead) {
     ofs.close();
     
     ofs.open(out_putfileName.c_str());
-    
+    cout << "Amount of Small Words in text: " << smallWordVector.size() << endl;
     for(int i = 0; i < smallWordVector.size(); i++) {
         ofs << smallWordVector.at(i) << endl;
+    }
+    
+    ofs.close();
+    
+    ofs.open(out_capitalFile.c_str());
+    
+    cout << "Amount of Important Terms: " << importantTerms.size() << endl;
+    for(int i = 0; i < importantTerms.size(); i++) {
+        ofs << importantTerms.at(i) << endl;
     }
     
     ofs.close();
